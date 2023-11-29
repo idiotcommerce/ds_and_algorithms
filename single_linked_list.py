@@ -47,23 +47,58 @@ class LinkedList:
             print('data not present in the linked list')
 
 
-    def add_node_before(self, data, present_value):
+    def add_empty(self, data):
+        if self.head is None:
+            new_node = Node(data)
+            self.head = new_node
+        else:
+            print( "linked list is not empty")
+            
+    def delete_at_begin(self):
         if self.head is None:
             return "linked list is empty"
-        new_node = Node(data)
-        if self.head.data == present_value:
-            new_node.ref = self.head
-            self.head = new_node
-        
+        elif self.head.ref is None:
+            self.head = None
 
+        else:
+            self.head = self.head.ref
+
+    def delete_at_end(self):
+        if self.head is None:
+            return "linked list is empty"
+        elif self.head.ref is None:
+            self.head = None
+            
+        else:
+            n = self.head
+            while n.ref.ref is not None:
+                n = n.ref
+            n.ref = None
+
+    def delete_at_middle(self, check):
+        if self.head is None:
+            return "this is empty linked list"
+        else: 
+            n = self.head
+            while n.ref is not None:
+                if n.ref.data == check:
+                    n.ref = n.ref.ref
+                    break
+                n = n.ref
+                    
 
 LL1 = LinkedList()
 LL1.add_begin(10)
 LL1.add_ending(35)
 LL1.add_begin(25)
 LL1.add_ending(55)
-
 LL1.add_node_after(888, 35)
+
+#LL1.delete_at_begin()
+#LL1.add_empty(10)
+#LL1.delete_at_end()
+
+LL1.delete_at_middle(55)
 
 LL1.print_LL()
 
